@@ -229,12 +229,15 @@ libraryPath = (args...) ->
 getFilenamesForHost = (host, domain) ->
   host = host.toLowerCase()
   domain = host.match(domain)?[0] ? "" if domain.test?
-
-  if host.slice(-domain.length - 1) is ".#{domain}"
-    parts  = host.slice(0, -domain.length - 1).split "."
+  domain_segment = /// ^ ( ([\.|\-]) (#{domain}) $ ) ///
+  if host.slice(-domain.length - 1).match domain_segment
+    parts  = host.slice(0, -domain.length - 1).split /([\.\-])/
     length = parts.length
     for i in [0...length]
-      parts.slice(i, length).join "."
+      if parts[i].match /[\.\-]/
+        continue
+      else
+        parts.slice(i, length).join ''
   else
     []
 
