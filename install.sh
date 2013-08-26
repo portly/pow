@@ -73,7 +73,7 @@
 
 # Download the requested version of Pow and unpack it.
 
-      curl -s http://get.pow.cx/versions/$VERSION.tar.gz | tar xzf -
+      curl -s https://portly.github.io/pow/$VERSION.tar.gz | tar xzf -
 
 
 # Update the Current symlink to point to the new version.
